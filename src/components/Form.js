@@ -3,6 +3,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import InputSet from "./InputSet";
 const Form = () => {
   const [formValid, setFormValid] = useState();
+  const [fetchErr, setFetchErr] = useState();
 
   const [contractSets, setContractSets] = useState([
     { id: randId(), contractNum: "", ezorNum: "" },
@@ -35,13 +36,23 @@ const Form = () => {
   function handleSubmitForm(e) {
     e.preventDefault();
     if (validateForm() === true) {
-      fetch("https://ol-dev-app1:30600/rest/api/submit-job/addToReceivePDF", {
+      fetch("/api/addToReceivePDF", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(contractSets),
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            setFetchErr(true);
+            setContractSets([{ id: randId(), contractNum: "", ezorNum: "" }]);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setFetchErr(true);
+        });
     } else {
       console.log("form not valid");
     }
@@ -69,6 +80,11 @@ const Form = () => {
       </button>
       {formValid == false && (
         <span className="form__valid-msg">הטופס אינו תקין</span>
+      )}
+      {fetchErr == true && (
+        <span className="form__valid-msg">
+          הייתה שגיאת מערכת. אנא צור קשר עם אורדע.
+        </span>
       )}
     </form>
   );
