@@ -3,6 +3,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
+}
+
+.form__title {
+  color: #2e506d;
+  font-weight: 500;
+  text-align: center;
 }
 
 .form__note {
@@ -11,7 +18,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  line-height: 0;
+  line-height: 1.4;
 }
 
 .form__row-set {
@@ -19,11 +26,13 @@
   flex-direction: row;
   align-items: end;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .form__input-set {
   display: flex;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 .form__input-group {
@@ -74,4 +83,33 @@
 
 .form__valid-msg {
   color: red;
+}
+
+.form__valid-msg_type_success {
+  color: rgb(0, 87, 0);
+}
+
+.form__icon-btn {
+  font-size: 22px;
+}
+
+.form__status {
+  background: aliceblue;
+  padding: 20px;
+}
+
+@media (max-width: 527px) {
+  .form {
+    gap: 5px;
+  }
+  .form__input-error {
+    top: 0;
+    position: relative;
+  }
+}
+
+@media (max-width: 380px) {
+  .form__input-group {
+    width: 88%;
+  }
 }

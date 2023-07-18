@@ -4,7 +4,7 @@ import logo from "./assets/MA-logo.png";
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <header className="header">
         <img className="header__logo" src={logo} alt="logo" />
       </header>
